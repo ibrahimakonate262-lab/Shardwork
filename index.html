@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ShardWorks — Free Minecraft resource packs & mods by MostCallMeShardy. Purple/rose themed, vanilla-friendly, ready to drop in.">
+<meta name="theme-color" content="#120a22">
+<title>ShardWorks — Minecraft Packs & Mods by MostCallMeShardy</title>
+
+<!-- Preconnect for fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ===== CSS CUSTOM PROPERTIES ===== */
+:root {
+  --bg-deep: #120a22;
+  --bg-elevated: #1e1238;
+  --bg-card: #281845;
+  --bg-card-hover: #321d58;
+  --rose-500: #e91e63;
+  --rose-400: #f06292;
+  --rose-300: #f8a5c2;
+  --purple-500: #9c27b0;
+  --purple-400: #ba68c8;
+  --purple-300: #ce93d8;
+  --violet-500: #673ab7;
+  --violet-400: #9575cd;
+  --fg-primary: #fff5fa;
+  --fg-secondary: #e8c8dc;
+  --fg-muted: #b899ad;
+  --fg-subtle: #8a6d80;
+  --border-subtle: rgba(233, 30, 99, 0.15);
+  --border-glow: rgba(233, 30, 99, 0.35);
+  --gradient-primary: linear-gradient(135deg, #e91e63 0%, #9c27b0 50%, #673ab7 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #f06292 0%, #ba68c8 50%, #9575cd 100%);
+  --gradient-bg: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(156, 39, 176, 0.18) 0%, transparent 70%),
+                 radial-gradient(ellipse 60% 50% at 100% 100%, rgba(233, 30, 99, 0.12) 0%, transparent 60%),
+                 radial-gradient(ellipse 50% 40% at 0% 100%, rgba(103, 58, 183, 0.1) 0%, transparent 50%),
+                 #120a22;
+  --gradient-card: linear-gradient(145deg, rgba(40, 24, 69, 0.9) 0%, rgba(30, 18, 56, 0.95) 100%);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --shadow-glow: 0 0 32px rgba(233, 30, 99, 0.25);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --transition-fast: 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-base: 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-slow: 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --container: 1200px;
+  --header-h: 72px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+body { font-family: var(--font-display); background: var(--gradient-bg); color: var(--fg-primary); line-height: 1.65; min-height: 100vh; overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+:focus-visible { outline: 2px solid var(--rose-400); outline-offset: 3px; border-radius: 4px; }
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.bg-aura { position: fixed; inset: 0; pointer-events: none; z-index: 0; background: radial-gradient(ellipse 600px 400px at 20% 10%, rgba(233, 30, 99, 0.18) 0%, transparent 60%), radial-gradient(ellipse 500px 300px at 80% 20%, rgba(156, 39, 176, 0.14) 0%, transparent 55%), radial-gradient(ellipse 400px 400px at 50% 80%, rgba(103, 58, 183, 0.1) 0%, transparent 50%), var(--bg-deep); }
+.bg-grid { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.035; background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 70% 70% at 50% 30%, black 0%, transparent 100%); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+@keyframes slideRight { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideLeft { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulse-glow { 0%, 100% { box-shadow: var(--shadow-glow); } 50% { box-shadow: 0 0 48px rgba(233, 30, 99, 0.4); } }
+@keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes text-reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.animate-fade-up { animation: fadeUp var(--transition-slow) forwards; opacity: 0; }
+.animate-fade-down { animation: fadeDown var(--transition-slow) forwards; opacity: 0; }
+.animate-fade-in { animation: fadeIn var(--transition-slow) forwards; opacity: 0; }
+.animate-scale-in { animation: scaleIn var(--transition-slow) forwards; opacity: 0; }
+.animate-slide-right { animation: slideRight var(--transition-slow) forwards; opacity: 0; }
+.animate-slide-left { animation: slideLeft var(--transition-slow) forwards; opacity: 0; }
+.delay-1 { animation-delay: 100ms; } .delay-2 { animation-delay: 200ms; } .delay-3 { animation-delay: 300ms; } .delay-4 { animation-delay: 400ms; } .delay-5 { animation-delay: 500ms; } .delay-6 { animation-delay: 600ms; } .delay-7 { animation-delay: 700ms; } .delay-8 { animation-delay: 800ms; }
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal-left.in-view { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal-right.in-view { opacity: 1; transform: translateX(0); }
+.reveal-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal-scale.in-view { opacity: 1; transform: scale(1); }
+.stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.stagger.in-view > * { opacity: 1; transform: translateY(0); }
+.stagger > *:nth-child(1) { transition-delay: 50ms; } .stagger > *:nth-child(2) { transition-delay: 100ms; } .stagger > *:nth-child(3) { transition-delay: 150ms; } .stagger > *:nth-child(4) { transition-delay: 200ms; } .stagger > *:nth-child(5) { transition-delay: 250ms; } .stagger > *:nth-child(6) { transition-delay: 300ms; } .stagger > *:nth-child(7) { transition-delay: 350ms; } .stagger > *:nth-child(8) { transition-delay: 400ms; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.625rem; padding: 0.875rem 1.75rem; border-radius: var(--radius-md); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.01em; transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast); white-space: nowrap; }
+.btn:active { transform: scale(0.96); }
+.btn-primary { background: var(--gradient-primary); color: white; box-shadow: 0 4px 16px rgba(233, 30, 99, 0.35); }
+.btn-primary:hover { background: var(--gradient-primary-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(233, 30, 99, 0.45); }
+.btn-outline { background: transparent; color: var(--fg-primary); border: 1px solid var(--border-glow); }
+.btn-outline:hover { background: rgba(233, 30, 99, 0.12); border-color: var(--rose-400); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--fg-secondary); }
+.btn-ghost:hover { color: var(--fg-primary); background: rgba(255,255,255,0.04); }
+.btn-sm { padding: 0.5rem 1rem; font-size: 0.8125rem; border-radius: var(--radius-sm); }
+.btn-lg { padding: 1.125rem 2.25rem; font-size: 1rem; border-radius: var(--radius-lg); }
+.header { position: fixed; top: 0; left: 0; right: 0; height: var(--header-h); z-index: 100; backdrop-filter: blur(20px); background: linear-gradient(180deg, rgba(18, 10, 34, 0.95) 0%, rgba(18, 10, 34, 0.7) 100%); border-bottom: 1px solid var(--border-subtle); transition: box-shadow var(--transition-base), background var(--transition-base); }
+.header.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+.logo { display: flex; align-items: center; gap: 0.625rem; font-weight: 800; font-size: 1.375rem; letter-spacing: -0.02em; }
+.logo-mark { width: 38px; height: 38px; border-radius: var(--radius-sm); background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-size: 1.125rem; animation: pulse-glow 3s ease-in-out infinite; }
+.logo-text { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; background-size: 200% 200%; animation: gradient-shift 4s ease-in-out infinite; }
+.nav { display: flex; align-items: center; gap: 0.5rem; }
+.nav-link { padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.9rem; color: var(--fg-secondary); transition: color var(--transition-fast), background var(--transition-fast); position: relative; }
+.nav-link::after { content: ''; position: absolute; bottom: 0.375rem; left: 50%; width: 0; height: 2px; background: var(--gradient-primary); border-radius: 2px; transition: width var(--transition-base), left var(--transition-base); }
+.nav-link:hover { color: var(--fg-primary); background: rgba(255,255,255,0.04); }
+.nav-link:hover::after { width: 70%; left: 15%; }
+.nav-link.active { color: var(--fg-primary); }
+.nav-link.active::after { width: 70%; left: 15%; }
+.nav-cta { margin-left: 0.5rem; }
+.mobile-menu-btn { display: none; padding: 0.5rem; border-radius: var(--radius-sm); color: var(--fg-primary); }
+.mobile-menu-btn:hover { background: rgba(255,255,255,0.06); }
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: calc(var(--header-h) + 2rem) 0 4rem; z-index: 1; isolation: isolate; }
+.hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--gradient-bg); }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.hero-content { position: relative; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; border-radius: 100px; background: rgba(233, 30, 99, 0.15); border: 1px solid var(--border-glow); font-size: 0.8125rem; font-weight: 500; color: var(--rose-300); margin-bottom: 1.5rem; animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; }
+.hero-badge span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--rose-400); }
+.hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+.hero-title .gradient-text { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; background-size: 200% 200%; animation: gradient-shift 5s ease-in-out infinite; }
+.hero-subtitle { font-size: clamp(1.125rem, 2.5vw, 1.375rem); color: var(--fg-secondary); line-height: 1.7; max-width: 540px; margin-bottom: 2rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+.hero-stats { display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 3vw, 2.5rem); padding-top: 2rem; border-top: 1px solid var(--border-subtle); }
+.stat-item { text-align: left; }
+.stat-value { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
+.stat-label { font-size: 0.8125rem; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.25rem; }
+.hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+.hero-card { position: relative; width: 100%; max-width: 480px; aspect-ratio: 4/3; border-radius: var(--radius-xl); background: var(--gradient-card); border: 1px solid var(--border-subtle); overflow: hidden; box-shadow: var(--shadow-lg), var(--shadow-glow); animation: float 6s ease-in-out infinite; }
+.hero-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(233, 30, 99, 0.08) 0%, rgba(156, 39, 176, 0.05) 50%, transparent 100%); pointer-events: none; }
+.card-window { position: absolute; inset: 1.5rem; border-radius: var(--radius-lg); background: rgba(10, 6, 20, 0.9); border: 1px solid var(--border-subtle); overflow: hidden; }
+.window-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border-subtle); }
+.window-dots { display: flex; gap: 0.375rem; }
+.window-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--fg-subtle); }
+.window-dots span:first-child { background: #ff5f57; }
+.window-dots span:nth-child(2) { background: #febc2e; }
+.window-dots span:last-child { background: #28ca42; }
+.window-title { margin-left: 0.75rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted); }
+.window-content { padding: 1.5rem; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.8; color: var(--fg-secondary); overflow: auto; height: calc(100% - 40px); }
+.code-line { opacity: 0; animation: fadeIn 0.5s forwards; }
+.code-line:nth-child(1) { animation-delay: 1.2s; }
+.code-line:nth-child(2) { animation-delay: 1.4s; color: var(--rose-300); }
+.code-line:nth-child(3) { animation-delay: 1.6s; color: var(--purple-300); }
+.code-line:nth-child(4) { animation-delay: 1.8s; color: var(--violet-400); }
+.code-line:nth-child(5) { animation-delay: 2s; color: var(--fg-muted); }
+.code-line:nth-child(6) { animation-delay: 2.2s; color: var(--rose-400); }
+.code-line:nth-child(7) { animation-delay: 2.4s; }
+.code-keyword { color: var(--rose-400); }
+.code-string { color: var(--violet-400); }
+.code-comment { color: var(--fg-subtle); }
+.code-function { color: var(--purple-300); }
+.floating-elements { position: absolute; inset: 0; pointer-events: none; }
+.float-orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.4; animation: float 8s ease-in-out infinite; }
+.float-orb:nth-child(1) { width: 180px; height: 180px; background: var(--rose-500); top: -40px; right: -40px; animation-delay: 0s; }
+.float-orb:nth-child(2) { width: 140px; height: 140px; background: var(--purple-500); bottom: -30px; left: -30px; animation-delay: -2s; }
+.float-orb:nth-child(3) { width: 100px; height: 100px; background: var(--violet-500); top: 40%; right: -20px; animation-delay: -4s; }
+.section { position: relative; z-index: 1; padding: clamp(4rem, 8vw, 7rem) 0; }
+.section-header { text-align: center; margin-bottom: clamp(3rem, 6vw, 4.5rem); max-width: 720px; margin-left: auto; margin-right: auto; }
+.section-tag { display: inline-block; padding: 0.375rem 1rem; border-radius: 100px; background: rgba(233, 30, 99, 0.12); border: 1px solid var(--border-glow); font-size: 0.8125rem; font-weight: 600; color: var(--rose-300); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.section-title { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.section-title .accent { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.section-desc { font-size: 1.125rem; color: var(--fg-secondary); line-height: 1.7; }
+.features { background: linear-gradient(180deg, transparent 0%, rgba(156, 39, 176, 0.03) 50%, transparent 100%); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.feature-card { position: relative; padding: 2.5rem 2rem; border-radius: var(--radius-lg); background: var(--gradient-card); border: 1px solid var(--border-subtle); transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base); }
+.feature-card:hover { transform: translateY(-6px); border-color: var(--border-glow); box-shadow: var(--shadow-lg), 0 0 40px rgba(233, 30, 99, 0.1); }
+.feature-icon { width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; }
+.feature-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.625rem; }
+.feature-desc { color: var(--fg-secondary); line-height: 1.7; font-size: 0.9375rem; }
+.feature-link { display: inline-flex; align-items: center; gap: 0.375rem; margin-top: 1.25rem; font-weight: 600; font-size: 0.875rem; color: var(--rose-300); transition: gap var(--transition-fast); }
+.feature-link:hover { gap: 0.625rem; color: var(--rose-200); }
+.packs { }
+.packs-header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 2.5rem; }
+.packs-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.filter-btn { padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; color: var(--fg-secondary); background: rgba(255,255,255,0.03); border: 1px solid transparent; transition: all var(--transition-fast); }
+.filter-btn:hover { background: rgba(233, 30, 99, 0.12); border-color: var(--border-glow); color: var(--fg-primary); }
+.filter-btn.active { background: var(--gradient-primary); color: white; border-color: transparent; box-shadow: 0 4px 16px rgba(233, 30, 99, 0.3); }
+.packs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.pack-card { position: relative; border-radius: var(--radius-lg); background: var(--gradient-card); border: 1px solid var(--border-subtle); overflow: hidden; transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base); }
+.pack-card:hover { transform: translateY(-8px); border-color: var(--border-glow); box-shadow: var(--shadow-lg), 0 0 40px rgba(233, 30, 99, 0.15); }
+.pack-thumb { aspect-ratio: 16/10; background: linear-gradient(135deg, rgba(233, 30, 99, 0.15) 0%, rgba(156, 39, 176, 0.1) 100%); position: relative; overflow: hidden; }
+.pack-thumb::after { content: ''; position: absolute; inset: 0; background: var(--gradient-primary); opacity: 0; transition: opacity var(--transition-base); }
+.pack-card:hover .pack-thumb::after { opacity: 0.15; }
+.pack-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 1rem; opacity: 0; transform: translateY(20px); transition: opacity var(--transition-base), transform var(--transition-base); z-index: 2; }
+.pack-card:hover .pack-overlay { opacity: 1; transform: translateY(0); }
+.pack-info { padding: 1.5rem; }
+.pack-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+.pack-tag { padding: 0.25rem 0.625rem; border-radius: 100px; font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(255,255,255,0.06); color: var(--fg-muted); }
+.pack-tag.type-resource { background: rgba(233, 30, 99, 0.2); color: var(--rose-300); border: 1px solid var(--border-glow); }
+.pack-tag.type-mod { background: rgba(156, 39, 176, 0.2); color: var(--purple-300); border: 1px solid rgba(156, 39, 176, 0.3); }
+.pack-tag.type-datapack { background: rgba(103, 58, 183, 0.2); color: var(--violet-400); border: 1px solid rgba(103, 58, 183, 0.3); }
+.pack-tag.version { background: rgba(255,255,255,0.06); color: var(--fg-subtle); font-family: var(--font-mono); }
+.pack-name { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.375rem; }
+.pack-desc { font-size: 0.875rem; color: var(--fg-muted); line-height: 1.6; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pack-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--border-subtle); }
+.pack-mc-version { font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-subtle); }
+.pack-download { font-size: 0.8125rem; font-weight: 600; color: var(--rose-300); display: inline-flex; align-items: center; gap: 0.375rem; transition: gap var(--transition-fast); }
+.pack-download:hover { gap: 0.625rem; color: var(--rose-200); }
+.about { background: linear-gradient(180deg, transparent 0%, rgba(103, 58, 183, 0.03) 50%, transparent 100%); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.about-visual { position: relative; }
+.about-card { border-radius: var(--radius-xl); background: var(--gradient-card); border: 1px solid var(--border-subtle); padding: 3rem; position: relative; overflow: hidden; }
+.about-card::before { content: ''; position: absolute; inset: 0; background: var(--gradient-primary); opacity: 0.03; }
+.about-avatar { width: 140px; height: 140px; border-radius: 50%; background: var(--gradient-primary); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: 800; background-size: 200% 200%; animation: gradient-shift 5s ease-in-out infinite; box-shadow: var(--shadow-glow); }
+.about-name { text-align: center; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+.about-handle { text-align: center; color: var(--rose-300); font-family: var(--font-mono); font-size: 0.9375rem; margin-bottom: 2rem; }
+.about-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.about-link { width: 48px; height: 48px; border-radius: var(--radius-md); background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--fg-secondary); transition: all var(--transition-fast); }
+.about-link:hover { background: var(--gradient-primary); border-color: transparent; color: white; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(233, 30, 99, 0.3); }
+.about-content { }
+.about-text { font-size: 1.0625rem; color: var(--fg-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
+.about-text strong { color: var(--fg-primary); }
+.about-highlights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+.highlight-item { padding: 1.25rem; border-radius: var(--radius-md); background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); transition: border-color var(--transition-fast), transform var(--transition-fast); }
+.highlight-item:hover { border-color: var(--border-glow); transform: translateY(-3px); }
+.highlight-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.highlight-title { font-weight: 600; margin-bottom: 0.25rem; }
+.highlight-desc { font-size: 0.8125rem; color: var(--fg-muted); line-height: 1.6; }
+.footer { position: relative; z-index: 1; padding: 4rem 0 2rem; border-top: 1px solid var(--border-subtle); background: linear-gradient(180deg, transparent 0%, rgba(10, 6, 20, 0.8) 100%); }
+.footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 3rem; margin-bottom: 3rem; }
+.footer-brand .logo { margin-bottom: 1rem; }
+.footer-desc { color: var(--fg-muted); font-size: 0.9375rem; line-height: 1.7; max-width: 300px; margin-bottom: 1.5rem; }
+.footer-social { display: flex; gap: 0.75rem; }
+.footer-social a { width: 40px; height: 40px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 1.125rem; color: var(--fg-secondary); transition: all var(--transition-fast); }
+.footer-social a:hover { background: var(--gradient-primary); border-color: transparent; color: white; transform: translateY(-2px); }
+.footer-title { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-subtle); margin-bottom: 1.25rem; }
+.footer-links { display: flex; flex-direction: column; gap: 0.625rem; }
+.footer-links a { font-size: 0.9375rem; color: var(--fg-secondary); transition: color var(--transition-fast), transform var(--transition-fast); }
+.footer-links a:hover { color: var(--rose-300); transform: translateX(4px); }
+.footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border-subtle); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.footer-copyright { font-size: 0.8125rem; color: var(--fg-subtle); }
+.footer-made { font-size: 0.8125rem; color: var(--fg-muted); font-family: var(--font-mono); }
+.footer-made span { color: var(--rose-400); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--rose-500), var(--purple-500)); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--rose-400), var(--purple-400)); }
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-content { order: 2; }
+  .hero-visual { order: 1; max-width: 420px; margin: 0 auto; }
+  .hero-stats { justify-content: center; }
+  .hero-actions { justify-content: center; }
+  .features-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-visual { order: -1; max-width: 380px; margin: 0 auto; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; text-align: center; }
+  .footer-brand .footer-desc { margin-left: auto; margin-right: auto; }
+  .footer-social { justify-content: center; }
+}
+@media (max-width: 640px) {
+  .nav { position: fixed; top: var(--header-h); left: 0; right: 0; background: rgba(18, 10, 34, 0.98); backdrop-filter: blur(20px); flex-direction: column; padding: 1.5rem; gap: 0.25rem; border-bottom: 1px solid var(--border-subtle); transform: translateY(-100%); opacity: 0; visibility: hidden; transition: transform var(--transition-base), opacity var(--transition-base), visibility var(--transition-base); }
+  .nav.open { transform: translateY(0); opacity: 1; visibility: visible; }
+  .nav-link { width: 100%; text-align: center; padding: 0.875rem 1rem; }
+  .nav-link::after { display: none; }
+  .nav-cta { margin-left: 0; width: 100%; }
+  .mobile-menu-btn { display: flex; }
+  .footer-grid { grid-template-columns: 1fr; text-align: center; }
+  .footer-links { align-items: center; }
+  .footer-links a:hover { transform: none; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-orb, .hero-card, .logo-mark { animation: none !important; }
+  .gradient-text, .logo-text, .about-avatar { animation: none !important; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .about-avatar { background: var(--gradient-primary); }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="bg-aura" aria-hidden="true"></div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<header class="header" id="header" role="banner">
+  <div class="container header-inner">
+    <a href="#top" class="logo" aria-label="ShardWorks Home">
+      <span class="logo-mark" aria-hidden="true">✦</span>
+      <span class="logo-text">ShardWorks</span>
+    </a>
+    <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+      <a href="#packs" class="nav-link">Packs</a>
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link btn btn-primary btn-sm nav-cta">Download</a>
+    </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge"><span>v2.1.0</span> Latest Release</div>
+        <h1 id="hero-title" class="hero-title">Minecraft Packs & Mods<br><span class="gradient-text">Crafted with Passion</span></h1>
+        <p class="hero-subtitle">Free, vanilla-friendly resource packs and lightweight mods. Built by <strong>MostCallMeShardy</strong> for the community. No paywalls. No telemetry. Just quality content.</p>
+        <div class="hero-actions">
+          <a href="#packs" class="btn btn-primary btn-lg">Browse All Packs</a>
+          <a href="https://github.com/MostCallMeShardy" target="_blank" rel="noopener" class="btn btn-outline btn-lg">View Source</a>
+        </div>
+        <div class="hero-stats stagger">
+          <div class="stat-item"><div class="stat-value" data-count="12">0</div><div class="stat-label">Packs Released</div></div>
+          <div class="stat-item"><div class="stat-value" data-count="48">0</div><div class="stat-label">Versions</div></div>
+          <div class="stat-item"><div class="stat-value" data-count="100">0</div><div class="stat-label">Free Forever</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="floating-elements" aria-hidden="true"><div class="float-orb"></div><div class="float-orb"></div><div class="float-orb"></div></div>
+          <div class="card-window">
+            <div class="window-header"><div class="window-dots"><span></span><span></span><span></span></div><span class="window-title">shardworks/main.pack</span></div>
+            <div class="window-content">
+              <div class="code-line"><span class="code-comment">// RoseCraft Resource Pack v2.1</span></div>
+              <div class="code-line"><span class="code-keyword">pack_format</span>=<span class="code-string">15</span></div>
+              <div class="code-line"><span class="code-keyword">description</span>=<span class="code-string">"Purple/rose themed textures"</span></div>
+              <div class="code-line"><span class="code-keyword">supported_formats</span>=<span class="code-string">["1.21", "1.20"]</span></div>
+              <div class="code-line"><span class="code-comment">// Features:</span></div>
+              <div class="code-line"><span class="code-function">✦</span> Custom block textures</div>
+              <div class="code-line"><span class="code-function">✦</span> Animated items</div>
+              <div class="code-line"><span class="code-function">✦</span> Custom fonts & UI</div>
+              <div class="code-line"><span class="code-function">✦</span> OptiFine support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section features" id="features" aria-labelledby="features-title">
+    <div class="container">
+      <header class="section-header reveal"><span class="section-tag">Why ShardWorks</span><h2 id="features-title" class="section-title">Built Different <span class="accent">By Design</span></h2><p class="section-desc">Every pack is tested, optimized, and crafted with attention to detail. No bloat, no compromises.</p></header>
+      <div class="features-grid stagger">
+        <article class="feature-card reveal-scale"><div class="feature-icon" aria-hidden="true">🎨</div><h3 class="feature-title">Vanilla+ Aesthetic</h3><p class="feature-desc">Enhances the vanilla look without changing the feel. Textures stay faithful to Minecraft's art direction while adding purple/rose accents.</p><a href="#packs" class="feature-link">Explore Packs <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></article>
+        <article class="feature-card reveal-scale"><div class="feature-icon" aria-hidden="true">⚡</div><h3 class="feature-title">Performance First</h3><p class="feature-desc">Optimized textures, no unnecessary files. Packs run smoothly on potato PCs and high-end rigs alike. 16x–512x options available.</p><a href="#packs" class="feature-link">See Specs <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></article>
+        <article class="feature-card reveal-scale"><div class="feature-icon" aria-hidden="true">🔓</div><h3 class="feature-title">100% Free & Open</h3><p class="feature-desc">No Patreon, no paywalls, no locked content. Everything is free forever. Source code on GitHub for transparency.</p><a href="https://github.com/MostCallMeShardy" target="_blank" rel="noopener" class="feature-link">View Source <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></article>
+        <article class="feature-card reveal-scale"><div class="feature-icon" aria-hidden="true">🔄</div><h3 class="feature-title">Regular Updates</h3><p class="feature-desc">New packs and updates every month. Compatible with latest Minecraft versions. Changelog included with every release.</p><a href="#packs" class="feature-link">Changelog <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></article>
+        <article class="feature-card reveal-scale"><div class="feature-icon" aria-hidden="true">🛠️</div><h3 class="feature-title">Easy Installation</h3><p class="feature-desc">One-click download, drag-and-drop install. Works with vanilla launcher, Prism, MultiMC, ATLauncher, and more.</p><a href="#packs" class="feature-link">Install Guide <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></article>
+        <article class="feature-card reveal-scale"><div class="feature-icon" aria-hidden="true">💜</div><h3 class="feature-title">Community Driven</h3><p class="feature-desc">Built with feedback from players. Request features, report bugs, suggest packs on Discord or GitHub Issues.</p><a href="https://discord.gg/" target="_blank" rel="noopener" class="feature-link">Join Discord <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section packs" id="packs" aria-labelledby="packs-title">
+    <div class="container">
+      <header class="section-header reveal"><span class="section-tag">Available Now</span><h2 id="packs-title" class="section-title">Resource Packs <span class="accent">& Mods</span></h2><p class="section-desc">All packs are free, tested, and ready to play. Filter by type or browse all.</p></header>
+      <div class="packs-header reveal">
+        <div class="packs-filter" role="group" aria-label="Filter packs">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="resource">Resource Packs</button>
+          <button class="filter-btn" data-filter="mod">Mods</button>
+          <button class="filter-btn" data-filter="datapack">Datapacks</button>
+        </div>
+      </div>
+      <div class="packs-grid stagger" id="packsGrid">
+        <!-- Pack cards will be rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <section class="section about" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual reveal-scale">
+          <div class="about-card">
+            <div class="about-avatar" aria-hidden="true">S</div>
+            <h3 class="about-name">MostCallMeShardy</h3>
+            <p class="about-handle">@MostCallMeShardy</p>
+            <div class="about-links">
+              <a href="https://github.com/MostCallMeShardy" target="_blank" rel="noopener" class="about-link" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+              <a href="https://discord.gg/" target="_blank" rel="noopener" class="about-link" aria-label="Discord"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.618-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.675 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.083.083 0 00.031.057 19.9 19.9 0 005.994 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.007-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.645.774 1.252 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.43-4.565-.364-9.055-3.552-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+              <a href="https://modrinth.com/user/MostCallMeShardy" target="_blank" rel="noopener" class="about-link" aria-label="Modrinth"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34l-4.52-4.519v-2.32c0-1.621.805-2.74 2.321-2.74 1.178 0 2.054.719 2.32 1.719l.001.161.276-.936c.112-.404.521-.7 1.028-.7.522 0 .95.32 1.044.74l.38 1.699h2.339v2.463l-3.876 3.875h-2.22zm-11.042 0l2.22-2.219v-2.565l-2.115 2.115c-.61.61-1.11 1.39-1.11 2.22 0 1.585 1.415 2.94 3.005 2.94.667 0 1.333-.187 1.896-.535l1.782-1.382-.516-2.224c-.535-.94-1.62-1.67-2.748-1.67-1.086 0-2.088.58-2.528 1.519l-.176.373-2.128-.822c-.362-.14-.76-.21-1.173-.21-.787 0-1.467.41-1.845 1.074l-.38 1.375h-2.48v2.402l3.89 3.89zm4.24-8.167c0-.737.563-1.26 1.314-1.26.722 0 1.294.523 1.294 1.26 0 .757-.572 1.28-1.294 1.28-.75 0-1.314-.523-1.314-1.28zm5.304 0c0-.737.563-1.26 1.295-1.26.75 0 1.313.523 1.313 1.26 0 .757-.563 1.28-1.313 1.28-.751 0-1.295-.523-1.295-1.28z"/></svg></a>
+            </div>
+          </div>
+        </div>
+        <div class="about-content reveal-left">
+          <p class="about-text">I'm <strong>MostCallMeShardy</strong> — a Minecraft player who loves creating resource packs and lightweight mods. Started making textures for my own worlds, friends asked for them, and now they're here for everyone.</p>
+          <p class="about-text">Every pack is built from scratch — no asset flips, no stolen textures. I test on multiple versions (1.21, 1.20.4, 1.19.4) and with OptiFine/Fabric/Forge. If something breaks, <a href="https://github.com/MostCallMeShardy/issues" target="_blank" rel="noopener" style="color: var(--rose-300);">open an issue</a> and I'll fix it.</p>
+          <div class="about-highlights stagger">
+            <div class="highlight-item"><div class="highlight-icon">🎨</div><h4 class="highlight-title">Custom Palettes</h4><p class="highlight-desc">Purple/rose theme across all packs. Consistent look whether you use one or all of them.</p></div>
+            <div class="highlight-item"><div class="highlight-icon">📦</div><h4 class="highlight-title">Modular Design</h4><p class="highlight-desc">Pick and choose — use just the block textures, or the full UI overhaul. No conflicts.</p></div>
+            <div class="highlight-item"><div class="highlight-icon">🔧</div><h4 class="highlight-title">Configurable</h4><p class="highlight-desc">Most packs include config files. Toggle animations, change colors, disable features.</p></div>
+            <div class="highlight-item"><div class="highlight-icon">🐛</div><h4 class="highlight-title">Bug-Free Guarantee</h4><p class="highlight-desc">Tested on 5+ launcher setups before release. If you find a bug, it's fixed in 48h.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <header class="section-header reveal"><span class="section-tag">Get In Touch</span><h2 id="contact-title" class="section-title">Requests? <span class="accent">Ideas?</span> Bugs?</h2><p class="section-desc">Open a GitHub issue, ping me on Discord, or tweet at me. I read everything.</p></header>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; text-align: center;">
+        <a href="https://github.com/MostCallMeShardy/issues/new/choose" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="width: 100%;">Report Bug / Request Pack</a>
+        <a href="https://discord.gg/" target="_blank" rel="noopener" class="btn btn-outline btn-lg" style="width: 100%;">Join Discord Community</a>
+        <a href="https://twitter.com/MostCallMeShardy" target="_blank" rel="noopener" class="btn btn-ghost btn-lg" style="width: 100%;">Follow on Twitter/X</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo" aria-label="ShardWorks Home"><span class="logo-mark" aria-hidden="true">✦</span><span class="logo-text">ShardWorks</span></a>
+        <p class="footer-desc">Free Minecraft resource packs & mods by MostCallMeShardy. Purple/rose themed, vanilla-friendly, open source.</p>
+        <div class="footer-social">
+          <a href="https://github.com/MostCallMeShardy" target="_blank" rel="noopener" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+          <a href="https://discord.gg/" target="_blank" rel="noopener" aria-label="Discord"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.618-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.675 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.083.083 0 00.031.057 19.9 19.9 0 005.994 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.007-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.645.774 1.252 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.43-4.565-.364-9.055-3.552-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          <a href="https://modrinth.com/user/MostCallMeShardy" target="_blank" rel="noopener" aria-label="Modrinth"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34l-4.52-4.519v-2.32c0-1.621.805-2.74 2.321-2.74 1.178 0 2.054.719 2.32 1.719l.001.161.276-.936c.112-.404.521-.7 1.028-.7.522 0 .95.32 1.044.74l.38 1.699h2.339v2.463l-3.876 3.875h-2.22zm-11.042 0l2.22-2.219v-2.565l-2.115 2.115c-.61.61-1.11 1.39-1.11 2.22 0 1.585 1.415 2.94 3.005 2.94.667 0 1.333-.187 1.896-.535l1.782-1.382-.516-2.224c-.535-.94-1.62-1.67-2.748-1.67-1.086 0-2.088.58-2.528 1.519l-.176.373-2.128-.822c-.362-.14-.76-.21-1.173-.21-.787 0-1.467.41-1.845 1.074l-.38 1.375h-2.48v2.402l3.89 3.89zm4.24-8.167c0-.737.563-1.26 1.314-1.26.722 0 1.294.523 1.294 1.26 0 .757-.572 1.28-1.294 1.28-.75 0-1.314-.523-1.314-1.28zm5.304 0c0-.737.563-1.26 1.295-1.26.75 0 1.313.523 1.313 1.26 0 .757-.563 1.28-1.313 1.28-.751 0-1.295-.523-1.295-1.28z"/></svg></a>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4 class="footer-title">Packs</h4>
+        <ul class="footer-links"><li><a href="#packs">All Packs</a></li><li><a href="#packs">Resource Packs</a></li><li><a href="#packs">Mods</a></li><li><a href="#packs">Datapacks</a></li></ul>
+      </nav>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4 class="footer-title">Links</h4>
+        <ul class="footer-links"><li><a href="https://github.com/MostCallMeShardy" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://modrinth.com/user/MostCallMeShardy" target="_blank" rel="noopener">Modrinth</a></li><li><a href="https://discord.gg/" target="_blank" rel="noopener">Discord</a></li><li><a href="#contact">Contact</a></li></ul>
+      </nav>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4 class="footer-title">Legal</h4>
+        <ul class="footer-links"><li><a href="#">License (MIT)</a></li><li><a href="#">Privacy</a></li><li><a href="#">No Cookies Policy</a></li></ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2025 ShardWorks. Free forever.</p>
+      <p class="footer-made">Made with <span>♥</span> by MostCallMeShardy</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== SIMPLE INTERACTIONS =====
+(function() {
+  'use strict';
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  const nav = document.getElementById('nav');
+  if (menuBtn && nav) {
+    menuBtn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+  }
+
+  // Header scroll effect
+  const header = document.getElementById('header');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 20) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+    lastScroll = y;
+  }, { passive: true });
+
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger').forEach(el => observer.observe(el));
+
+  // Counter animation for stats
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        let current = 0;
+        const duration = 1500;
+        const start = performance.now();
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * target);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        statObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => statObserver.observe(el));
+
+  // Pack filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const packsGrid = document.getElementById('packsGrid');
+  const packsData = [
+    { id: 'rosecraft', name: 'RoseCraft', type: 'resource', version: '2.1.0', mc: '1.21 / 1.20', desc: 'Purple/rose themed vanilla+ resource pack. Custom blocks, items, UI, fonts, and animated textures. 16x–512x.', thumb: 'https://via.placeholder.com/600x375/281845/e91e63?text=RoseCraft' },
+    { id: 'shardui', name: 'ShardUI', type: 'resource', version: '1.4.0', mc: '1.21 / 1.20', desc: 'Clean, minimal HUD overhaul. Rose-colored health/hunger, custom hotbar, inventory redesign. No OptiFine needed.', thumb: 'https://via.placeholder.com/600x375/1e1238/9c27b0?text=ShardUI' },
+    { id: 'amethyst-ores', name: 'Amethyst Ores', type: 'resource', version: '1.0.0', mc: '1.21+', desc: 'Re-textures all ores with purple/amethyst variants. Deepslate, nether, end variants included. Subtle animated shimmer.', thumb: 'https://via.placeholder.com/600x375/120a22/673ab7?text=Amethyst+Ores' },
+    { id: 'auto-sort', name: 'AutoSort', type: 'mod', version: '1.2.0', mc: '1.21 (Fabric/Forge)', desc: 'Lightweight inventory auto-sort. Middle-click to sort. Configurable rules. No dependencies.', thumb: 'https://via.placeholder.com/600x375/281845/e91e63?text=AutoSort' },
+    { id: 'quick-stack', name: 'QuickStack', type: 'mod', version: '1.1.0', mc: '1.21 (Fabric)', desc: 'Shift-click to quick-stack items into nearby chests. Range configurable. Server-side compatible.', thumb: 'https://via.placeholder.com/600x375/1e1238/9c27b0?text=QuickStack' },
+    { id: 'rose-datapack', name: 'Rose Utilities', type: 'datapack', version: '1.0.0', mc: '1.21 / 1.20', desc: 'Quality-of-life datapack: vein miner, tree chopper, auto-smelt, custom recipes. No mods needed.', thumb: 'https://via.placeholder.com/600x375/120a22/673ab7?text=Rose+Utilities' },
+  ];
+
+  function renderPacks(filter = 'all') {
+    if (!packsGrid) return;
+    const filtered = filter === 'all' ? packsData : packsData.filter(p => p.type === filter);
+    packsGrid.innerHTML = filtered.map((pack, i) => `
+      <article class="pack-card reveal-scale" style="transition-delay: ${i * 50}ms" data-type="${pack.type}">
+        <div class="pack-thumb" style="background-image: url('${pack.thumb}'); background-size: cover; background-position: center;"></div>
+        <div class="pack-overlay">
+          <a href="https://github.com/MostCallMeShardy/${pack.id}/releases" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Download</a>
+          <a href="https://github.com/MostCallMeShardy/${pack.id}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Source</a>
+        </div>
+        <div class="pack-info">
+          <div class="pack-meta">
+            <span class="pack-tag type-${pack.type}">${pack.type === 'resource' ? 'Resource Pack' : pack.type === 'mod' ? 'Mod' : 'Datapack'}</span>
+            <span class="pack-tag version">${pack.version}</span>
+          </div>
+          <h3 class="pack-name">${pack.name}</h3>
+          <p class="pack-desc">${pack.desc}</p>
+          <div class="pack-footer">
+            <span class="pack-mc-version">MC ${pack.mc}</span>
+            <a href="https://github.com/MostCallMeShardy/${pack.id}/releases" target="_blank" rel="noopener" class="pack-download">Download <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></a>
+          </div>
+        </div>
+      </article>
+    `).join('');
+    // Re-observe new elements
+    packsGrid.querySelectorAll('.reveal-scale').forEach(el => observer.observe(el));
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderPacks(btn.dataset.filter);
+    });
+  });
+
+  // Initial render
+  renderPacks('all');
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
